@@ -5,7 +5,7 @@ import { Card } from 'react-bootstrap';
 const Expert = ({ expert }) => {
   const { name, img } = expert;
   return (
-    <div className="col-12 col-md-6 col-lg-4 g-4">
+    <div id='experts' className="col-12 col-md-6 col-lg-4 g-4">
       <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={img} />
         <Card.Body>
