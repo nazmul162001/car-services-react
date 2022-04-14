@@ -1,17 +1,23 @@
-import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
 
 const Register = () => {
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
   const navigate = useNavigate();
+
+
 
   const handleRegister = (e) => {
     e.preventDefault();
-    const name = e.target.name.value
-    const email = e.target.email.value
-    const password = e.target.password.value
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-    console.log(name,email, password);
+    createUserWithEmailAndPassword(email, password);
   };
 
   const navigateRegister = (e) => {
@@ -25,7 +31,7 @@ const Register = () => {
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control
-            name='name'
+            name="name"
             type="text"
             placeholder="Your name"
             required
@@ -35,7 +41,7 @@ const Register = () => {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
-            name='email'
+            name="email"
             type="email"
             placeholder="Enter email"
             required
@@ -48,7 +54,7 @@ const Register = () => {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
-            name='password'
+            name="password"
             type="password"
             placeholder="Password"
             required
