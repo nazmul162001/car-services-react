@@ -82,9 +82,9 @@ const Login = () => {
       <p>
         {' '}
         Forget password ?{' '}
-        <Link to="/register" className="text-primary" onClick={resetPassword}>
+        <button className="text-primary btn btn-link" onClick={resetPassword}>
           reset password
-        </Link>{' '}
+        </button>{' '}
       </p>
       <p>
         {' '}
