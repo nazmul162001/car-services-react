@@ -3,10 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import { useState } from 'react';
 
 const Register = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+
+    const [agree, setAgree]= useState(false)
 
   const navigate = useNavigate();
 
@@ -18,7 +21,11 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    createUserWithEmailAndPassword(email, password);
+    // const agree = e.target.terms.checked;
+    if(agree){
+      createUserWithEmailAndPassword(email, password);
+    }
+
   };
 
   const navigateRegister = (e) => {
@@ -56,10 +63,10 @@ const Register = () => {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Accept terms & condition" />
+        <Form.Group className= 'mb-3' controlId="formBasicCheckbox">
+          <Form.Check type="checkbox" name='terms' onClick={() => setAgree(!agree)}  className= {agree ? 'text-danger' : 'text-primary'} label="Accept terms & condition" />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button className='w-50 mb-3 d-block mx-auto' disabled = {!agree} variant="primary" type="submit">
           Register
         </Button>
       </Form>

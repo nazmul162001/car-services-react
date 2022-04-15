@@ -17,7 +17,6 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
 
-  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
 
   if (user) {
     navigate(from, { replace: true });
@@ -37,12 +36,14 @@ const Login = () => {
     signInWithEmailAndPassword(email, password);
   };
 
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
   const navigateRegister = (e) => {
     navigate('/register');
   };
 
   // reset
-  const resetPassword = async () => {
+  const resetPassword = async() => {
     const email = emailRef.current.value;
     await sendPasswordResetEmail(email);
     alert('Sent email');
