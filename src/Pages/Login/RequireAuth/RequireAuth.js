@@ -24,7 +24,7 @@ const RequireAuth = ({ children }) => {
   }
 
   // for email  verified
-  if (!user.emailVerified) {
+  if (user.providerData[0]?.providerId === 'password' && !user.emailVerified) {
     return (
       <div
         style={{ width: '100%', height: '70vh' }}
@@ -36,7 +36,7 @@ const RequireAuth = ({ children }) => {
             className="btn btn-secondary py-2 px-4"
             onClick={async () => {
               await sendEmailVerification();
-              toast.success('Email sent')
+              toast.success('Email sent');
             }}
           >
             Sent Code Again
